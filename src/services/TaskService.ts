@@ -1,10 +1,11 @@
 import axios, { AxiosInstance } from "axios";
+import { IDataResponse } from "../store/taskStore";
 
 export interface Task {
   id: string;
   title: string;
-  color: string;
-  completed: boolean;
+  color?: string;
+  completed?: boolean;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -22,26 +23,34 @@ class TaskService {
     });
   }
 
-  async getTasks(): Promise<Task[]> {
-    const response = await this.api.get<Task[]>("/tasks");
-    console.log(response);
+  async getTasks(): Promise<IDataResponse<Task[]>> {
+    const response = await this.api.get<IDataResponse<Task[]>>("/tasks");
     return response.data;
   }
 
   async createTask(
     task: Omit<Task, "id" | "createdAt" | "updatedAt">
-  ): Promise<Task> {
-    const response = await this.api.post<Task>("/tasks", task);
+  ): Promise<IDataResponse<Task>> {
+    const response = await this.api.post<IDataResponse<Task>>("/tasks", task);
     return response.data;
   }
 
-  async updateTask(id: string, updatedTask: Partial<Task>): Promise<Task> {
-    const response = await this.api.put<Task>(`/tasks/${id}`, updatedTask);
+  async updateTask(
+    id: number,
+    updatedTask: Partial<Task>
+  ): Promise<IDataResponse<Task>> {
+    const response = await this.api.put<IDataResponse<Task>>(
+      `/tasks/${id}`,
+      updatedTask
+    );
     return response.data;
   }
 
-  async deleteTask(id: string): Promise<void> {
-    await this.api.delete(`/tasks/${id}`);
+  async deleteTask(id: number): Promise<IDataResponse<boolean>> {
+    const response = await this.api.delete<IDataResponse<boolean>>(
+      `/tasks/${id}`
+    );
+    return response.data;
   }
 }
 

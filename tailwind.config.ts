@@ -1,17 +1,5 @@
 import type { Config } from "tailwindcss";
 
-const colors = {
-  red: "#FF3B30",
-  orange: "#FF9500",
-  yellow: "#FFCC00",
-  green: "#34C759",
-  blue: "#007AFF",
-  indigo: "#5856D6",
-  purple: "#AF52DE",
-  pink: "#FF2D55",
-  brown: "#A2845E",
-};
-
 export default {
   content: [
     "src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -33,7 +21,6 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        custom: colors,
       },
     },
   },

@@ -1,10 +1,10 @@
-const IconBtn = ({
-  icon,
-  onClick,
-}: {
+import React from "react";
+
+interface IconBtnProps {
   icon: JSX.Element;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-}) => {
+  onClick: () => void;
+}
+const IconBtn: React.FC<IconBtnProps> = ({ icon, onClick }) => {
   return <button onClick={onClick}>{icon}</button>;
 };
 
